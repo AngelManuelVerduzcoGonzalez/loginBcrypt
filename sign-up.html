@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-up</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <form class="form" id="form">
+        <label class="label" for="username">Username</label>
+        <input class="input" type="text" name="username" id="username">
+        <label class="label" for="password">Password</label>
+        <input class="input" type="password" name="password" id="password">
+        <label class="label" for="confirm-password">Confirm Password</label>
+        <input class="input" type="password" name="confirm-password" id="confirm-password">
+        <button id="btn" class="button" type="button">Sign-up</button>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
+    <script src="./js/sign-up.js"></script>
+</body>
+</html>
