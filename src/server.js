@@ -12,12 +12,12 @@ app.use(cors({
 
 app.post('/save-user', (req, res) => {
     const user = req.body;
-    const filePath = path.join(__dirname, 'usuarios.json');
+    const filePath = path.join(__dirname, '../usuarios.json');
 
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading file:', err);
-            return res.status(500).send('Internal Server Error');
+            return res.status(500).json({ error: 'Internal Server Error' });
         }
 
         let users = [];
