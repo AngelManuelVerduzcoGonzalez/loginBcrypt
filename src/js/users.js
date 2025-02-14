@@ -7,6 +7,18 @@ async function getUsers() {
     return users;
 }
 
+async function changeStatus(username) { 
+    const response = await fetch(`http://localhost:3000/users/${username}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    const data = await response.json();
+    console.log(data);
+}
+
 async function displayUsers() {
     const users = await getUsers();
 
@@ -18,7 +30,7 @@ async function displayUsers() {
 
         tdUsername.textContent = user.username;
         tdRole.textContent = user.role;
-        tdActive.textContent = user.isActive;
+        tdActive.innerHTML = `<button class='btnStatus' onClick="changeStatus('${user.username}')">${user.isActive ? 'Active' : 'Inactive'}</button>`;
 
         tr.appendChild(tdUsername);
         tr.appendChild(tdRole);
