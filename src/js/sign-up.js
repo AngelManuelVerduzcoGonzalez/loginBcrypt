@@ -73,10 +73,12 @@ async function saveUser(user) {
 btn.addEventListener('click', (e) => {
     e.preventDefault();
 
+    const user = {
+        username: username.value,
+        password: password.value
+    };
+
     if (validatePasswords() && validateUsername()) {
-        saveUser({
-            username: username.value,
-            password: password.value
-        });
+        saveUser(user);
     }
 });

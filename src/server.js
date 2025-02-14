@@ -39,6 +39,27 @@ app.post('/save-user', (req, res) => {
     });
 });
 
+app.get('/users/:username', (req, res) => {
+    const username = req.params.username;
+    const filePath = path.join(__dirname, '../usuarios.json');
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading file:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+
+        const users = JSON.parse(data);
+        const user = users.find(user => user.username === username);
+
+        if (user) {
+            res.status(200).json(user);
+        } else {
+            res.status(404).json({ error: 'User not found' });
+        }
+    });
+})
+
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
