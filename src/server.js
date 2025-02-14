@@ -39,6 +39,20 @@ app.post('/save-user', (req, res) => {
     });
 });
 
+app.get('/users', (req, res) => { 
+    const filePath = path.join(__dirname, '../usuarios.json');
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading file:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+
+        const users = JSON.parse(data);
+        res.status(200).json(users);
+    });
+})
+
 app.get('/users/:username', (req, res) => {
     const username = req.params.username;
     const filePath = path.join(__dirname, '../usuarios.json');
