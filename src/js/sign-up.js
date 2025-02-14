@@ -75,7 +75,9 @@ btn.addEventListener('click', (e) => {
 
     const user = {
         username: username.value,
-        password: password.value
+        password: password.value,
+        role: 1,
+        isActive: true,
     };
 
     if (validatePasswords() && validateUsername()) {

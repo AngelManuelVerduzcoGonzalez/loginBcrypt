@@ -3,26 +3,42 @@ const btnLogin = document.getElementById('btnLogin');
 const username = document.getElementById('username');
 const password = document.getElementById('password');
 
-async function validateLogin() {
+async function getUser() {
     const response = await fetch(`http://localhost:3000/users/${username.value}`);
     const user = await response.json();
 
-    await dcodeIO.bcrypt.compare(password.value, user.password, (err, result) => {
-        if (err) {
-            console.error('Error comparing passwords:', err);
-            alert('Internal Server Error');
-        } else if (result) {
+    return user;
+}
+
+async function checkRole(user) {
+    if(user.role === 'admin') {
+        window.location.href = 'users.html';
+    } else {
+        window.location.href = 'index.html';
+    }
+}
+
+async function validateLogin(user) {
+    try {
+        const match = await dcodeIO.bcrypt.compare(password.value, user.password);
+
+        if (match) {
             return true;
         } else {
             return false;
         }
-    });
+    } catch (err) {
+        console.error('Error:', err);
+        return false;
+    }
 };
 
 btnLogin.addEventListener('click', async () => {
 
-    if (await validateLogin()) {
-        window.location.href = 'users.html';
+    const user = await getUser();
+
+    if (await validateLogin(user)) {
+        checkRole(user);
     } else {
         alert('Invalid username or password');
     }
