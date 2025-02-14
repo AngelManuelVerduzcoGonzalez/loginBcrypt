@@ -10,11 +10,13 @@ async function getUser() {
     return user;
 }
 
-async function checkRole(user) {
-    if(user.role === 'admin') {
+async function checkUser(user) {
+    if(user.role === 'admin' && user.isActive) {
         window.location.href = 'users.html';
-    } else {
+    } else if(user.role === 'user' && user.isActive) {
         window.location.href = 'index.html';
+    } else {
+        alert('User is inactive');
     }
 }
 
@@ -38,7 +40,7 @@ btnLogin.addEventListener('click', async () => {
     const user = await getUser();
 
     if (await validateLogin(user)) {
-        checkRole(user);
+        checkUser(user);
     } else {
         alert('Invalid username or password');
     }

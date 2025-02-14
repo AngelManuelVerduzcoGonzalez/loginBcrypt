@@ -102,7 +102,7 @@ app.post('/users/:username', (req, res) => {
                 return res.status(500).json({ error: 'Internal Server Error' });
             } else {
                 console.log('User saved successfully');
-                res.status(200).json({ message: 'User saved successfully' });
+                res.status(200).json({ message: 'User status modified successfully' });
             }
         });
     });
