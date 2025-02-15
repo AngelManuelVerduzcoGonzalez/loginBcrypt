@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 const saltRounds = 10;
 
 const btn = document.getElementById('btn');
@@ -54,7 +56,7 @@ async function saveUser(user) {
         const hashedPassword = await hashPassword(user.password);
         user.password = hashedPassword;
 
-        const response = await fetch('http://localhost:3000/save-user', {
+        const response = await fetch('http://localhost:3000/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -74,6 +76,7 @@ btn.addEventListener('click', (e) => {
     e.preventDefault();
 
     const user = {
+        id: uuidv4(),
         username: username.value,
         password: password.value,
         role: 1,
