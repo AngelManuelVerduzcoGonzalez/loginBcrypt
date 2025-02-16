@@ -12,12 +12,17 @@ async function login() {
         body: JSON.stringify({ username: username.value, password: password.value })
     });
 
+    const data = await response.json();
+
     if (response.ok) {
-        const data = await response.json();
         localStorage.setItem('token', data.token);
         redirectToPage(data.token);
-    } else {
-        alert('Invalid username or password');
+    } else if (response.status == 401) {
+        alert(`${data.error}`);
+    } else if (response.status == 429) {
+        alert(`${data.error}`);
+    } else if (response.status = 403) {
+        alert(`${data.error}`);
     }
 }
 

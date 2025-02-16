@@ -19,6 +19,8 @@ module.exports = {
 
             if (!user) {
                 return res.status(401).json({ error: 'Invalid username or password' });
+            } else if(!user.isActive) {
+                return res.status(403).json({ error: 'User is not active, please contact and administrator' });
             }
 
             const match = await bcrypt.compare(password, user.password);
