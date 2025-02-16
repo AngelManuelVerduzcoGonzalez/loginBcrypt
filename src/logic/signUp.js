@@ -8,7 +8,7 @@ const confirmPassword = document.getElementById('confirm-password');
 function validatePasswords() {
     const passwordRegex = /^[a-zA-Z0-9]+$/;
 
-    if (password.value < 8) {
+    if (password.value.length < 8) {
         alert('Password must be at least 8 characters long');
         return false;
     }

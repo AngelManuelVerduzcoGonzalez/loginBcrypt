@@ -44,9 +44,12 @@ async function displayUsers() {
         const tdRole = document.createElement('td');
         const tdActive = document.createElement('td');
 
-        tdUsername.textContent = user.username;
-        tdRole.textContent = user.role;
-        tdActive.innerHTML = `<button class='btnStatus' onClick="changeStatus('${user.username}')">${user.isActive ? 'Active' : 'Inactive'}</button>`;
+        const sanitizedUsername = DOMPurify.sanitize(user.username);
+        const sanitizedRole = DOMPurify.sanitize(user.role);
+
+        tdUsername.textContent = sanitizedUsername;
+        tdRole.textContent = sanitizedRole;
+        tdActive.innerHTML = `<button class='btnStatus' onClick="changeStatus('${sanitizedUsername}')">${sanitizedRole ? 'Active' : 'Inactive'}</button>`;
 
         tr.appendChild(tdUsername);
         tr.appendChild(tdRole);
