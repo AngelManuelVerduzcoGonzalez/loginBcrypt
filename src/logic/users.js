@@ -1,7 +1,22 @@
 const table = document.getElementById('table');
 
-async function getUsers() { 
-    const response = await fetch('http://localhost:3000/users');
+if (!localStorage.getItem("token")) {
+    location.href = "/src/pages/denied.html"
+} else {
+    const token = localStorage.getItem("token");
+    const user = jwt_decode(token);
+
+    if (user.role !== 'admin') {
+        location.href = "/src/pages/denied.html"
+    }
+}
+
+async function getUsers() {
+    const response = await fetch('http://localhost:3000/users', {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    });
     const users = await response.json();
 
     return users;
@@ -11,6 +26,7 @@ async function changeStatus(username) {
     const response = await fetch(`http://localhost:3000/users/${username}`, {
         method: 'PUT',
         headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
             'Content-Type': 'application/json'
         }
     });

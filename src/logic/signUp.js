@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
-
 const saltRounds = 10;
 
 const btn = document.getElementById('btn');
@@ -9,6 +7,11 @@ const confirmPassword = document.getElementById('confirm-password');
 
 function validatePasswords() {
     const passwordRegex = /^[a-zA-Z0-9]+$/;
+
+    if (password.value < 8) {
+        alert('Password must be at least 8 characters long');
+        return false;
+    }
 
     if (password.value !== confirmPassword.value) {
         alert('Passwords do not match');
@@ -56,7 +59,7 @@ async function saveUser(user) {
         const hashedPassword = await hashPassword(user.password);
         user.password = hashedPassword;
 
-        const response = await fetch('http://localhost:3000/users', {
+        const response = await fetch('http://localhost:3000/sign-up', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -76,10 +79,9 @@ btn.addEventListener('click', (e) => {
     e.preventDefault();
 
     const user = {
-        id: uuidv4(),
         username: username.value,
         password: password.value,
-        role: 1,
+        role: "user",
         isActive: true,
     };
 
