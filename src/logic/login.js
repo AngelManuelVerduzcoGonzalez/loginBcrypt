@@ -17,12 +17,8 @@ async function login() {
     if (response.ok) {
         localStorage.setItem('token', data.token);
         redirectToPage(data.token);
-    } else if (response.status == 401) {
-        alert(`${data.error}`);
-    } else if (response.status == 429) {
-        alert(`${data.error}`);
-    } else if (response.status = 403) {
-        alert(`${data.error}`);
+    } else {
+        alert(data.error);
     }
 }
 
