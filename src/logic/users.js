@@ -49,7 +49,7 @@ async function displayUsers() {
 
         tdUsername.textContent = sanitizedUsername;
         tdRole.textContent = sanitizedRole;
-        tdActive.innerHTML = `<button class='btnStatus' onClick="changeStatus('${sanitizedUsername}')">${sanitizedRole ? 'Active' : 'Inactive'}</button>`;
+        tdActive.innerHTML = `<button class='btnStatus' onClick="changeStatus('${sanitizedUsername}')">${user.isActive ? 'Active' : 'Inactive'}</button>`;
 
         tr.appendChild(tdUsername);
         tr.appendChild(tdRole);
