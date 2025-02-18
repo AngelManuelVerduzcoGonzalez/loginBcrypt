@@ -9,17 +9,17 @@ function validatePasswords() {
     const passwordRegex = /^[a-zA-Z0-9]+$/;
 
     if (password.value.length < 8) {
-        alert('Password must be at least 8 characters long');
+        mostrarErrorToast('Password must be at least 8 characters long');
         return false;
     }
 
     if (password.value !== confirmPassword.value) {
-        alert('Passwords do not match');
+        mostrarErrorToast('Passwords do not match');
         return false;
     }
 
     if (!passwordRegex.test(password.value)) {
-        alert('Password must contain only numbers and letters');
+        mostrarErrorToast('Password must contain only numbers and letters');
         return false;
     }
 
@@ -30,12 +30,12 @@ function validateUsername() {
     const usernameRegex = /^[a-zA-Z0-9]+$/;
 
     if (username.value.length < 4) {
-        alert('Username must be at least 4 characters long');
+        mostrarErrorToast('Username must be at least 4 characters long');
         return false;
     }
 
     if (!usernameRegex.test(username.value)) {
-        alert('Username must contain only numbers and letters');
+        mostrarErrorToast('Username must contain only numbers and letters');
         return false;
     }
 

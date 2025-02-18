@@ -18,7 +18,7 @@ async function login() {
         localStorage.setItem('token', data.token);
         redirectToPage(data.token);
     } else {
-        alert(data.error);
+        mostrarErrorToast(data.error);
     }
 }
 
@@ -30,7 +30,7 @@ function redirectToPage(token) {
     } else if (user.role === 'user') {
         window.location.href = '/src/pages/home.html';
     } else {
-        alert('Unknown role');
+        mostrarErrorToast('Unknown role');
     }
 }
 
